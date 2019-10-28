@@ -4,7 +4,6 @@ namespace App\Service;
 
 use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\ClientInterface;
-use GraphAware\Neo4j\Client\Exception\NeoClientExceptionInterface;
 use GraphAware\Neo4j\Client\Exception\Neo4jException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -33,15 +32,6 @@ class Neo4jService
     }
 
     /**
-     * @return mixed
-     * @throws NeoClientExceptionInterface
-     */
-    public function run(string $query): ?Result
-    {
-        return $this->client->run($query);
-    }
-
-    /**
      * Seed the Neo4j database with a publicly available periodic table in csv format
      * 
      * @return Result|null
@@ -53,7 +43,7 @@ class Neo4jService
         if (!$query) {
             throw new Neo4jException('Could not find seed query file: ' . $file);
         }
-        return $this->run($query);
+        return $this->client->run($query);
     }
 
     /**
@@ -63,7 +53,7 @@ class Neo4jService
      */
     public function all(): ?Result
     {
-        return $this->run("MATCH(n) RETURN n");
+        return $this->client->run("MATCH(n) RETURN n");
     }
 
     /**
@@ -71,7 +61,7 @@ class Neo4jService
      */
     public function truncate(): self
     {
-        $this->run("MATCH(n) DETACH DELETE n");
+        $this->client->run("MATCH(n) DETACH DELETE n");
         return $this;
     }
 
