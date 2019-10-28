@@ -1,0 +1,6 @@
+neo4j:
+    profiling: 
+        enabled: true
+    connections:
+        default:
+            dsn: '%env(resolve:NEO4J_DEFAULT_CONNECTION_DSN)%'
