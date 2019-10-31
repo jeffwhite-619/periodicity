@@ -1,0 +1,8 @@
+<div style="min-width:{{squareSize}}; max-width:{{squareSize}}; width:{{squareSize}}; height:{{squareSize}}; float:left; clear: none; border:1px solid black; padding:none; text-align:center;position:relative;">
+    <div style="font-size:11px;">{{ node.get('Element') }}</div>
+    <div style="font-size:20px;">{{ node.get('AtomicNumber') }}</div> {# link to detail page #}
+    <div style="position:relative;bottom:-5px;display: inline-block; width:25%; font-size:25px; font-weight:bold;">
+        {{ node.get('Symbol') }}
+    </div><br>
+    <div style="position:relative;bottom:-20px;font-size:15px;float:bottom;clear:both;">{{ node.get('AtomicMass') }}</div>
+</div>

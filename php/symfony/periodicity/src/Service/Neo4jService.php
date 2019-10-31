@@ -53,7 +53,7 @@ class Neo4jService
      */
     public function all(): ?Result
     {
-        return $this->client->run("MATCH(n) RETURN n");
+        return $this->client->run("MATCH(n) RETURN n ORDER BY n.AtomicNumber");
     }
 
     /**
