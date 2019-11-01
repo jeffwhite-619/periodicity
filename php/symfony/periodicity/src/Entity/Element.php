@@ -13,17 +13,6 @@ class Element extends Node
 {
 
     /**
-     * Relationships
-     */
-
-    /**
-     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block")
-     * 
-     * @var Block
-     */
-     protected $block;
-
-    /**
      * @OGM\GraphId()
      * @var int
      */
