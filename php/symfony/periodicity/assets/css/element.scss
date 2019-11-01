@@ -1,0 +1,18 @@
+
+.element {
+    float:left; 
+    clear: none; 
+    border:1px solid black; 
+    padding:none; 
+    text-align:center; 
+    cursor:pointer;
+}
+
+.element-blank {
+    float:left; 
+    clear: none; 
+    border:1px; 
+    margin:none; 
+    padding:1px;
+    cursor:default;
+}

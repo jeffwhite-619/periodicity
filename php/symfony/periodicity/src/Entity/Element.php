@@ -4,12 +4,24 @@ namespace App\Entity;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Common\Graph\Node;
+use App\Relationship\Block;
 
 /**
  * @OGM\Node(label="Element")
  */
 class Element extends Node
 {
+
+    /**
+     * Relationships
+     */
+
+    /**
+     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block")
+     * 
+     * @var Block
+     */
+     protected $block;
 
     /**
      * @OGM\GraphId()
