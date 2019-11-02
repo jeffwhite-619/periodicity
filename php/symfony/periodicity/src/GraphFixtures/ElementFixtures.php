@@ -2,21 +2,21 @@
 
 namespace App\GraphFixtures;
 
-use App\Service\Neo4jService;
+use App\Service\Neo4jSeederService;
 use Exception;
 
 class ElementFixtures
 {
     protected $service;
 
-    public function __construct(Neo4jService $service)
+    public function __construct(Neo4jSeederService $service)
     {
         $this->service = $service;
     }
 
     public function load()
     {
-        $result = $this->service->truncate()->seed();
+        $this->service->truncate()->seed()->relateBlocks();
     }
 
 }

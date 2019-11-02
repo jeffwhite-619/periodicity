@@ -31,5 +31,8 @@ CREATE(:Element {
     Year: toInteger(line.Year),
     SpecificHeat: toFloat(line.SpecificHeat),
     NumberofShells: toInteger(line.NumberofShells),
-    NumberofValence: toInteger(line.NumberofValence)
+    NumberofValence: toInteger(line.NumberofValence),
+    Block: line.Block,
+    ElectronConfiguration: line.ElectronConfiguration,
+    ElectronsPerShell: line.ElectronsPerShell
 })

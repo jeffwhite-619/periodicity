@@ -61,12 +61,11 @@ class Neo4jSeederService
      */
     public function relateBlocks(): self
     {
+
         $query = <<<HEREDOC
-MATCH(n:Element {Element:"Hydrogen"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-MATCH(n:Element {Element:"Helium"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-MATCH(n:Element {Element:"Lithium"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-
-
+MATCH (element:Element)
+MERGE (block:Block { name: element.Block })
+MERGE (element)-[:IN_BLOCK]->(block);
 HEREDOC;
         $this->client->run($query);
         return $this;
