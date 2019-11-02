@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Common\Graph\Node;
+use App\Relationship\Block;
 
 /**
  * @OGM\Node(label="Element")

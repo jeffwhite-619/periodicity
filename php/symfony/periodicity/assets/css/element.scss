@@ -1,0 +1,104 @@
+@mixin widthsize($widthSize) {
+    min-width: $widthSize; 
+    max-width: $widthSize; 
+    width: $widthSize; 
+}
+
+@mixin heightsize($heightSize) {
+    height: $heightSize; 
+    min-height: $heightSize; 
+    max-height: $heightSize;
+}
+
+@mixin square($squareSize) {
+    @include widthsize($squareSize);
+    @include heightsize($squareSize);
+}
+
+.periodic {
+    @include widthsize(var(--tableWidth)); 
+    @include heightsize(var(--tableHeight));
+    margin: 0 auto; 
+    position: relative; 
+    top: -100px;
+    div.heading {
+        margin: 1em auto; 
+        max-width: 800px; 
+        width: 95%; 
+        font: 18px/1.5 sans-serif;
+        position: relative; 
+        left: -165px; 
+        top: 150px;
+        h1 {
+            font-size: 48px;
+        }
+    }
+
+    div.table {
+        @include widthsize(var(--tableWidth)); 
+        @include heightsize(var(--tableHeight));
+        border: none; 
+        padding: 0; 
+        margin: 0;
+    }
+}
+
+.synthetic {
+    @include widthsize(var(--tableWidth)); 
+    @include heightsize(var(--tableHeight));
+    border: none;
+}
+
+.element {
+    @include square(var(--squareSize));
+    float: left; 
+    clear: none; 
+    border: 1px solid black; 
+    padding: none; 
+    text-align: center; 
+    border-radius: 10%;
+    cursor: pointer;
+    .name {
+        font-family: sans;
+        font-size: 13px;
+    }
+    .atomicNumber {
+        font-family: sans;
+        font-size: 20px;
+    }
+    .symbol {
+        position: relative;
+        bottom: -5%;
+        display: inline-block; 
+        width: 25%; 
+        font-size: 25px; 
+        font-weight: bold;
+    }
+    .atomicMass {
+        font-family: sans;
+        position: relative;
+        bottom: -16%;
+        font-size: 15px;
+        float: bottom;
+        clear: both;
+    }
+}
+
+.element-blank {
+    @include square(var(--squareSize));
+    float: left; 
+    clear: none; 
+    border: 1px; 
+    margin: none; 
+    padding: 1px;
+    cursor: default;
+}
+
+.clear {
+    display: inline-block;
+    float: none;
+    clear: both;
+    margin: 0;
+    width: 0;
+    height: 0;
+}
