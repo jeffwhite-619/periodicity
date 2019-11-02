@@ -56,24 +56,28 @@
     border: 1px solid black; 
     padding: none; 
     text-align: center; 
+    border-radius: 10%;
     cursor: pointer;
     .name {
-        font-size: 11px;
+        font-family: sans;
+        font-size: 13px;
     }
     .atomicNumber {
+        font-family: sans;
         font-size: 20px;
     }
     .symbol {
         position: relative;
-        bottom: -5px;
+        bottom: -5%;
         display: inline-block; 
         width: 25%; 
         font-size: 25px; 
         font-weight: bold;
     }
     .atomicMass {
+        font-family: sans;
         position: relative;
-        bottom: -20px;
+        bottom: -16%;
         font-size: 15px;
         float: bottom;
         clear: both;
