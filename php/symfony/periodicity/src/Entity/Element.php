@@ -13,7 +13,7 @@ class Element extends Node
 {
 
     /**
-     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block")
+     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block" mappedBy="name")
      * 
      * @var Block
      */
@@ -95,7 +95,7 @@ class Element extends Node
      * @OGM\Property(type="string", nullable=true)
      * @var string
      */
-    private $Natural;
+    private $NaturalOccurence;
 
     /**
      * @OGM\Property(type="string", nullable=true)
@@ -107,7 +107,7 @@ class Element extends Node
      * @OGM\Property(type="string", nullable=true)
      * @var string
      */
-    private $Type;
+    private $ElementCategory;
 
     /**
      * @OGM\Property(type="float", nullable=true)
@@ -318,14 +318,14 @@ class Element extends Node
         return $this;
     }
 
-    public function getNatural(): ?string
+    public function getNaturalOccurence(): ?string
     {
-        return $this->Natural;
+        return $this->NaturalOccurence;
     }
 
-    public function setNatural(?string $Natural): self
+    public function setNaturalOccurence(?string $NaturalOccurence): self
     {
-        $this->Natural = $Natural;
+        $this->NaturalOccurence = $NaturalOccurence;
 
         return $this;
     }
@@ -342,14 +342,14 @@ class Element extends Node
         return $this;
     }
 
-    public function getType(): ?string
+    public function getElementCategory(): ?string
     {
-        return $this->Type;
+        return $this->ElementCategory;
     }
 
-    public function setType(?string $Type): self
+    public function setElementCategory(?string $ElementCategory): self
     {
-        $this->Type = $Type;
+        $this->ElementCategory = $ElementCategory;
 
         return $this;
     }
@@ -494,6 +494,30 @@ class Element extends Node
     public function setNumberofValence(?int $NumberofValence): self
     {
         $this->NumberofValence = $NumberofValence;
+
+        return $this;
+    }
+
+    public function getElectronConfiguration(): ?string
+    {
+        return $this->ElectronConfiguration;
+    }
+
+    public function setElectronConfiguration(?string $ElectronConfiguration): self
+    {
+        $this->ElectronConfiguration = $ElectronConfiguration;
+
+        return $this;
+    }
+
+    public function getElectronsPerShell(): ?string
+    {
+        return $this->ElectronsPerShell;
+    }
+
+    public function setElectronsPerShell(?string $ElectronsPerShell): self
+    {
+        $this->ElectronsPerShell = $ElectronsPerShell;
 
         return $this;
     }

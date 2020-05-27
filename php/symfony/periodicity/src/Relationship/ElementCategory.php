@@ -6,9 +6,9 @@ use GraphAware\Neo4j\OGM\Annotations as OGM;
 use GraphAware\Common\Graph\Node;
 
 /**
- * @OGM\Relationship(type="IN_BLOCK", direction="BOTH")
+ * @OGM\Relationship(type="IN_CATEGORY", direction="BOTH")
  */
-class Block extends Node
+class ElementCategory extends Node
 {
     
     /**

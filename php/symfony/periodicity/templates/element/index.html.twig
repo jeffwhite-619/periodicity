@@ -15,11 +15,45 @@
 
 <div class="periodic" style="--tableWidth:{{tableWidth}}; --tableHeight:{{tableHeight}};">
     <div class="heading">
-        <h1>Periodic Table of Elements</h1>
+        <h1>Periodic Table <wbr>of Elements</h1>
+        <div id="legend-wrapper">
+            <fieldset id="block-legend">
+                <legend>Block Legend</legend>
+                <div id="s"><div class="color"></div><div class="legendcaption">s-block</div></div>
+                <div id="d"><div class="color"></div><div class="legendcaption">d-block</div></div>
+                <div id="p"><div class="color"></div><div class="legendcaption">p-block</div></div>
+                <div id="f"><div class="color"></div><div class="legendcaption">f-block</div></div>
+                <div class="clear"></div>
+            </fieldset>
+            <fieldset class="category-legend">
+                <legend>Category Legend</legend>
+                <fieldset class="category-legend">
+                    <legend>Metals</legend>
+                    <div class="alkali-metal" id="alkali-metal"><div class="color"></div><div class="legendcaption">Alkali <br>Metal</div></div>
+                    <div class="alkaline-earth-metal" id="alkaline-earth-metal"><div class="color"></div><div class="legendcaption">Alkaline <br>Earth <br>Metal</div></div>
+                    <div class="lanthanide" id="lanthanide"><div class="color"></div><div class="legendcaption">Lantha-<br>nide</div></div>
+                    <div class="actinide" id="actinide"><div class="color"></div><div class="legendcaption">Actinide</div></div>
+                    <div class="transition-metal" id="transition-metal"><div class="color"></div><div class="legendcaption">Transition <br>Metal</div></div>
+                    <div class="post-transition-metal" id="post-transition-metal"><div class="color"></div><div class="legendcaption">Post <br>Transition <br>Metal</div></div>
+                    <div class="clear"></div>
+                </fieldset>
+                
+                <fieldset class="category-legend">
+                    <legend>NonMetals</legend>
+                    <div class="reactive-nonmetal" id="noble-gas"><div class="legendcaption">Reactive <br>NonMetal</div></div>
+                    <div class="noble-gas" id="noble-gas"><div class="legendcaption">Noble <br>Gas</div></div>
+                    <div class="clear"></div>
+                </fieldset>
+                <div class="metalloid" id="metalloid"><div class="legendcaption">Metalloid</div></div>
+                <div class="unknown" id="unknown"><div class="legendcaption">Unknown</div></div>
+                <div class="clear"></div>
+            </fieldset>
+        </div>
+        <div style="margin-bottom: -130px;"></div>
     </div>
     
     <div class="table" style="--tableWidth:{{tableWidth}}; --tableHeight:{{tableHeight}};">
-    {% for node in allNodes if node.containsKey('Group') %}
+    {% for node in allNodes|filter(node => node.containsKey('Group')) -%}
 
         {% set nodeGroup = node.get('Group') %}
         {% set offset = offset + 1 %}
@@ -47,7 +81,7 @@
     {% for i in 1..3 %}
         {% include elementBlank with {"squareSize": squareSize} %}
     {% endfor %}
-    {% for node in allNodes if not node.containsKey('Group') %}
+    {% for node in allNodes|filter(node => not node.containsKey('Group')) -%}
         {% include element with {"node": node, "squareSize": squareSize} %}
         {% set name = node.get('Element') %}
         {# Lutetium is the last Lanthanide in Period 6 #}

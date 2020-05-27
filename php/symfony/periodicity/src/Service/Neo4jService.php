@@ -2,10 +2,10 @@
 
 namespace App\Service;
 
+use App\Entity\Element;
 use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\ClientInterface;
-
-//use GraphAware\Neo4j\OGM\EntityManager;
+use GraphAware\Neo4j\OGM\EntityManager;
 
 
 class Neo4jService
@@ -17,16 +17,31 @@ class Neo4jService
     protected $client;
 
     /**
-     * 
-     * 
+     * @var EntityManager
      */
-    public function __construct(ClientInterface $client)
+    protected $manager;
+
+    /**
+     * 
+     * @param ClientInterface   $client
+     * @param EntityManager     $manager
+     */
+    public function __construct(ClientInterface $client, EntityManager $manager)
     {
-        $this->client = $client;
+        $this->client  = $client;
+        $this->manager = $manager;
+    }
+
+    public function getElements()
+    {
+        $repository = $this->manager->getRepository(Element::class);
+        $result = $repository->all();
+        return $result;
     }
 
     /**
      * Get all nodes regardless of relationships
+     * Result has Records has RecordView
      * 
      * @return Result|null
      */

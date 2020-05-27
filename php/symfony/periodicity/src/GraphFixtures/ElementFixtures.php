@@ -16,7 +16,7 @@ class ElementFixtures
 
     public function load()
     {
-        $this->service->truncate()->seed()->relateBlocks();
+        $this->service->truncate()->seed()->relateBlocks()->relateCategories();
     }
 
 }

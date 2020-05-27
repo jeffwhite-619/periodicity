@@ -26,16 +26,24 @@ class ElementController extends AbstractController
      */
     public function index()
     {
-        $results = $this->service->all()->records();
+        $results  = $this->service->all()->records();
         $allNodes = [];
         foreach($results as $result) {
-            $allNodes[] = $result->values()[0]; //->get('AtomicNumber');
+            $allNodes[] = $result->values()[0];
         }
-        // var_dump($allNodes);
-        // die('TEST');
         return $this->render('element/index.html.twig', [
             'controller_name' => 'ElementController',
             'allNodes'        => $allNodes,
         ]);
+    }
+
+    /**
+     * @Route("/atoms", name="atoms")
+     */
+    public function atoms()
+    {
+        $results = $this->service->getElements();
+        var_dump($results);
+        die('TEST');
     }
 }
