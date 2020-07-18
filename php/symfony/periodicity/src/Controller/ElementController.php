@@ -3,9 +3,10 @@
 namespace App\Controller;
 
 use App\Service\Neo4jService;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-// use Neo4j\Neo4jBundle\Collector\Twig;
+use GraphAware\Bolt\Result\Type\Node;
 
 class ElementController extends AbstractController
 {
@@ -25,7 +26,13 @@ class ElementController extends AbstractController
      */
     public function index()
     {
-        $allNodes = $this->service->all();
+        $results  = $this->service->all()->records();
+
+        $allNodes = [];
+        foreach ($results as $result) {
+            $allNodes[] = $result->values()[0];
+        }
+
         return $this->render('element/index.html.twig', [
             'controller_name' => 'ElementController',
             'allNodes'        => $allNodes,

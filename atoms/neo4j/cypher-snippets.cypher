@@ -1,4 +1,16 @@
 
+
+MATCH (n) RETURN n
+
+MATCH(n) DETACH DELETE(n)
+
+use GraphAware\Neo4j\OGM\Annotations as OGM;
+//use GraphAware\Neo4j\OGM\Common\Collection;
+
+
+
+
+
 // bad
 //CREATE (ep:ElementaryParticle { name: "electron", chargeSign: "-", charge: 1, spin: 0.5 })
 //CREATE (ep:ElementaryParticle { name: "proton", chargeSign: "+", charge: 1, spin: 0.5, isospin: 0.5, parity: +1 })
@@ -100,3 +112,17 @@ RETURN a
 
 
 /// query for rate of change in properties
+// --
+
+
+
+
+
+MATCH (n) 
+WHERE EXISTS(n.groupName) 
+RETURN DISTINCT "node" as entity, n.groupName AS groupName LIMIT 25 
+
+UNION ALL 
+
+MATCH ()-[r]-() WHERE EXISTS(r.groupName) 
+RETURN DISTINCT "relationship" AS entity, r.groupName AS groupName LIMIT 25

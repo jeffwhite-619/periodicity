@@ -1,20 +1,96 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ElementController!{% endblock %}
+{% block title %}Periodicity: Element
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	{% set elementBlank = '/element/themes/theme_element_blank.html.twig' %}
+	{% set element = '/element/themes/theme_element.html.twig' %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/www/periodicity/php/symfony/periodicity/src/Controller/ElementController.php'|file_link(0) }}">src/Controller/ElementController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/www/periodicity/php/symfony/periodicity/templates/element/index.html.twig'|file_link(0) }}">templates/element/index.html.twig</a></code></li>
-    </ul>
-</div>
+	{% set offset = 0 %}
+	{% set square = 100 %}
+	{% set squareSize = [square,"px"]|join %}
+	{% set tableWidth = [(square * 18) + 38,"px"]|join %}
+	{% set tableHeight = [(square * 7) + 13,"px"]|join %}
+
+	<div class="periodic" style="--tableWidth:{{tableWidth}}; --tableHeight:{{tableHeight}};">
+		<div class="heading">
+			<h1>Periodic Table
+				<wbr>of Elements</h1>
+			<div id="legend-wrapper">
+				<fieldset id="block-legend">
+					<legend>Block Legend</legend>
+					<div id="legendblocks">
+
+						<div id="s">
+							<div class="color"></div>
+							<div class="legendcaption">s-block</div>
+						</div>
+						<div id="d">
+							<div class="color"></div>
+							<div class="legendcaption">d-block</div>
+						</div>
+						<div id="p">
+							<div class="color"></div>
+							<div class="legendcaption">p-block</div>
+						</div>
+						<div id="f">
+							<div class="color"></div>
+							<div class="legendcaption">f-block</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</fieldset>
+			</div>
+			<div style="margin-bottom: 150px;"></div>
+		</div>
+
+		<div class="table" style="--tableWidth:{{tableWidth}}; --tableHeight:{{tableHeight}};">
+			{% for node in allNodes|filter(node => node.containsKey('Group')) -%}
+
+				{% set nodeGroup = node.get('Group') %}
+				{% set offset = offset + 1 %}
+
+				{% if offset != nodeGroup %}
+					{% set limit = nodeGroup - 1 %}
+					{% for i in offset..limit %}
+						{% include elementBlank with {"squareSize": squareSize} %}
+					{% endfor %}
+				{% endif %}
+
+				{% set offset = nodeGroup %}
+				{% include element with {"node": node, "squareSize": squareSize} %}
+
+				{% if 18 == offset %}
+					{% set offset = 0 %}
+					<div class="clear"></div>
+				{% endif %}
+
+			{% endfor %}
+		</div>
+		<br><br>
+		{% set tableHeight = [(square * 2) + 3,"px"]|join %}
+		<div class="synthetic" style="--tableWidth:{{tableWidth}}; --tableHeight:{{tableHeight}};">
+			{% for i in 1..3 %}
+				{% include elementBlank with {"squareSize": squareSize} %}
+			{% endfor %}
+			{% for node in allNodes|filter(node => not node.containsKey('Group')) -%}
+				{% include element with {"node": node, "squareSize": squareSize} %}
+				{% set name = node.get('Element') %}
+				{# Lutetium is the last Lanthanide in Period 6 #}
+				{% if name == 'Lutetium' %}
+					{% include elementBlank with {"squareSize": squareSize} %}
+					<div class="clear"></div>
+					{% for i in 1..3 %}
+						{% include elementBlank with {"squareSize": squareSize} %}
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('build/element.css') }}">
 {% endblock %}

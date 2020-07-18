@@ -2,67 +2,48 @@
 
 namespace App\Service;
 
+use App\Entity\Element;
 use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\ClientInterface;
-use GraphAware\Neo4j\Client\Exception\Neo4jException;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use GraphAware\Neo4j\OGM\EntityManagerInterface;
+
 
 class Neo4jService
 {
 
-    /**
-     * @var ParameterBagInterface
-     */
-    protected $parameterBag;
-
-    /**
-     * @var ClientInterface
-     */
+    /**  @var ClientInterface */
     protected $client;
 
+    /** @var EntityManagerInterface */
+    protected $manager;
+
     /**
      * 
-     * 
-     * @param ParameterBagInterface $parameterBag
+     * @param ClientInterface           $client
+     * @param EntityManagerInterface    $manager
      */
-    public function __construct(ParameterBagInterface $parameterBag, ClientInterface $client)
+    public function __construct(ClientInterface $client, EntityManagerInterface $manager)
     {
-        $this->parameterBag = $parameterBag;
-        $this->client       = $client;
+        $this->client  = $client;
+        $this->manager = $manager;
     }
 
     /**
-     * Seed the Neo4j database with a publicly available periodic table in csv format
-     * 
-     * @return Result|null
+     * @return iterable
      */
-    public function seed(): ?Result
+    public function getElements()
     {
-        $file  = $this->parameterBag->get('kernel.project_dir') . '/../../../atoms/neo4j/load-csv-seed.cypher';
-        $query = file_get_contents($file);
-        if (!$query) {
-            throw new Neo4jException('Could not find seed query file: ' . $file);
-        }
-        return $this->client->run($query);
+        return $this->manager->getRepository(Element::class)->findAll();
     }
 
     /**
      * Get all nodes regardless of relationships
+     * Result has Records has RecordView
      * 
      * @return Result|null
      */
     public function all(): ?Result
     {
-        return $this->client->run("MATCH(n) RETURN n");
+        return $this->client->run("MATCH(n:Element) RETURN n ORDER BY n.AtomicNumber");
     }
-
-    /**
-     * @return Neo4jService
-     */
-    public function truncate(): self
-    {
-        $this->client->run("MATCH(n) DETACH DELETE n");
-        return $this;
-    }
-
 }
