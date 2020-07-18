@@ -5,38 +5,35 @@ namespace App\Service;
 use App\Entity\Element;
 use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\ClientInterface;
-use GraphAware\Neo4j\OGM\EntityManager;
+use GraphAware\Neo4j\OGM\EntityManagerInterface;
 
 
 class Neo4jService
 {
 
-    /**
-     * @var ClientInterface
-     */
+    /**  @var ClientInterface */
     protected $client;
 
-    /**
-     * @var EntityManager
-     */
+    /** @var EntityManagerInterface */
     protected $manager;
 
     /**
      * 
-     * @param ClientInterface   $client
-     * @param EntityManager     $manager
+     * @param ClientInterface           $client
+     * @param EntityManagerInterface    $manager
      */
-    public function __construct(ClientInterface $client, EntityManager $manager)
+    public function __construct(ClientInterface $client, EntityManagerInterface $manager)
     {
         $this->client  = $client;
         $this->manager = $manager;
     }
 
+    /**
+     * @return iterable
+     */
     public function getElements()
     {
-        $repository = $this->manager->getRepository(Element::class);
-        $result = $repository->all();
-        return $result;
+        return $this->manager->getRepository(Element::class)->findAll();
     }
 
     /**
@@ -49,6 +46,4 @@ class Neo4jService
     {
         return $this->client->run("MATCH(n:Element) RETURN n ORDER BY n.AtomicNumber");
     }
-
-
 }
