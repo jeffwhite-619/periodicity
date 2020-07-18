@@ -11,35 +11,52 @@ use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\Exception\Neo4jExceptionInterface;
 use GraphAware\Neo4j\Client\ClientInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use GraphAware\Neo4j\OGM\EntityManagerInterface;
 
+/**
+ * @group neo4j-service
+ */
 class Neo4jServiceTest extends TestCase
 {
 
-    /**
-     * @var Mock
-     */
-    protected $clientMock;
+    /** @var Mock|ClientInterface */
+    private $clientMock;
 
-    /**
-     * @var Neo4jService
-     */
-    protected $service;
+    /** @var Neo4jService */
+    private $service;
 
     public function setUp(): void
     {
-        // alias for testing static methods
-        $this->clientMock = Mockery::mock('alias:' . ClientInterface::class)->makePartial();
+        parent::setUp();
+        $this->clientMock = Mockery::mock(ClientInterface::class)->makePartial();
         $this->clientMock->shouldAllowMockingProtectedMethods();
 
-        $parameterBagMock = Mockery::mock(ParameterBagInterface::class)->makePartial();
-        $parameterBagMock->shouldAllowMockingProtectedMethods();
-        $parameterBagMock->add(['kernel.project_dir' => '../../']);
+        $emMock = Mockery::mock(EntityManagerInterface::class)->makePartial();
+        $emMock->shouldAllowMockingProtectedMethods();
 
-        $this->service = new Neo4jService($parameterBagMock, $this->clientMock);
+        $this->service = new Neo4jService($this->clientMock, $emMock);
     }
 
-    public function testRunFails()
+    public function testRunFail()
     {
-        
+        $resultMock = Mockery::mock(Result::class)->makePartial();
+        $resultMock->shouldAllowMockingProtectedMethods();
+
+        $this->clientMock->shouldReceive('run')->once()->andReturnNull();
+
+        $results = $this->service->all();
+        $this->assertNull($results);
+    }
+
+
+    public function testRunSuccess()
+    {
+        $resultMock = Mockery::mock(Result::class)->makePartial();
+        $resultMock->shouldAllowMockingProtectedMethods();
+
+        $this->clientMock->shouldReceive('run')->once()->andReturn($resultMock);
+
+        $results = $this->service->all();
+        $this->assertInstanceOf(Result::class, $results);
     }
 }
