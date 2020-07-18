@@ -4,7 +4,7 @@
 @use "sass:color";
 
 .clear {
-    clear: both;
+  clear: both;
 }
 
 /*
@@ -12,82 +12,78 @@
 */
 
 @mixin plastictext() {
-    text-shadow:
-        0 0 2px rgba(204, 208, 212,0.9),
-        0 15px 25px rgba(0, 0, 0, 0.3),
-        0 -2px 3px rgba(0, 0, 0, 0.1),
-        0 -5px 10px rgba(255, 255, 255, 0.5),
-        0 5px 10px rgba(0, 0, 0, 0.3),
-        0 3px 4px rgba(255, 255, 255, 0.2),
-        0 0 20px rgba(255, 255, 255, 0.45);
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.9), 0 15px 25px rgba(0, 0, 0, 0.3),
+    0 -2px 3px rgba(0, 0, 0, 0.1), 0 -5px 10px rgba(255, 255, 255, 0.5),
+    0 5px 10px rgba(0, 0, 0, 0.3), 0 3px 4px rgba(255, 255, 255, 0.2),
+    0 0 20px rgba(204, 208, 212, 0.45);
 }
 
 @mixin chiseltext() {
-    text-shadow: 0px 1px 1px #fdfdfd;
+  text-shadow: 0px 1px 1px #fdfdfd;
 }
 
 /*
 * Colors
 */
-
-$sBlockBg: IndianRed; /* wtf racist color is this */
-$dBlockBg: GreenYellow;
-$pBlockBg: SteelBlue;
-$fBlockBg: Violet;
-
+$sBlockBg: #797979;
+$dBlockBg: #3f3f3f;
+$pBlockBg: #f5f5f5;
+$fBlockBg: #bcbcbc;
 
 /*
 * Table
 */
 
 @mixin widthsize($widthSize) {
-    min-width: $widthSize; 
-    max-width: $widthSize; 
-    width: $widthSize; 
+  min-width: $widthSize;
+  max-width: $widthSize;
+  width: $widthSize;
 }
 
 @mixin heightsize($heightSize) {
-    height: $heightSize; 
-    min-height: $heightSize; 
-    max-height: $heightSize;
+  height: $heightSize;
+  min-height: $heightSize;
+  max-height: $heightSize;
 }
 
 .periodic {
-    @include widthsize(var(--tableWidth)); 
-    @include heightsize(var(--tableHeight));
-    margin: 0 auto; 
-    position: relative; 
-    top: -100px;
-    div.heading {
-        margin: 1em auto; 
-        max-width: 800px; 
-        width: 95%; 
-        font: 18px/1.5 sans-serif;
-        position: relative; 
-        left: -165px; 
-        top: 150px;
-        h1 {
-            text-align: center;
-            font-size: 50px;
-            color: #d7ceb2;
-            text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
-            letter-spacing: 10px;
-        }
-    }
+  @include widthsize(var(--tableWidth));
+  @include heightsize(var(--tableHeight));
+  margin: 0 auto;
+  position: relative;
+  top: -100px;
 
-    div.table {
-        @include widthsize(var(--tableWidth)); 
-        @include heightsize(var(--tableHeight));
-        border: none; 
-        padding: 0; 
-        margin: 0;
+  div.heading {
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+    position: relative;
+    left: -165px;
+    top: 150px;
+
+    h1 {
+      text-align: center;
+      font-size: 50px;
+      color: #f9f9f9;
+      text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
+      letter-spacing: 10px;
     }
+  }
+
+  div.table {
+    @include widthsize(var(--tableWidth));
+    @include heightsize(var(--tableHeight));
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .synthetic {
-    @include widthsize(var(--tableWidth)); 
-    @include heightsize(var(--tableHeight));
-    border: none;
+  @include widthsize(var(--tableWidth));
+  @include heightsize(var(--tableHeight));
+  border: none;
 }
 
 /*
@@ -95,88 +91,94 @@ $fBlockBg: Violet;
 */
 
 @mixin square($squareSize) {
-    @include widthsize($squareSize);
-    @include heightsize($squareSize);
+  @include widthsize($squareSize);
+  @include heightsize($squareSize);
 }
 
 .element {
+  @include square(var(--squareSize));
+  float: left;
+  clear: none;
+  border: 1px solid black;
+  padding: 0;
+  text-align: center;
+  border-radius: 10%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 2px 3px rgba(0, 0, 0, 0.5);
+
+  &::before {
+    content: "";
+    background: linear-gradient(top,
+        rgba(255, 255, 255, 0.15),
+        rgba(0, 0, 0, 0.25)),
+      linear-gradient(left top,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.1) 50%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0));
+  }
+
+  .name {
+    font-family: sans;
+    font-size: 12px;
+    font-weight: bold;
+    @include chiseltext();
+  }
+
+  .atomicNumber {
+    font-family: sans;
+    font-size: 20px;
+    @include chiseltext();
+  }
+
+  .symbol {
+    position: relative;
+    bottom: -5%;
+    display: inline-block;
+    width: 25%;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: center;
+    @include plastictext();
+  }
+
+  .atomicMass {
+    font-family: sans;
+    position: relative;
+    bottom: -16%;
+    font-size: 15px;
+    float: bottom;
+    clear: both;
+    @include chiseltext();
+  }
+
+  .element-overlay {
     @include square(var(--squareSize));
-    float: left; 
-    clear: none; 
-    border: 1px solid black; 
-    padding: 0; 
-    text-align: center; 
+    position: relative;
+    top: -85%;
+    left: 0px;
+    opacity: 0.25;
     border-radius: 10%;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .5), 0 2px 3px rgba(0, 0, 0, .5);
-
-    &::before {
-        content: "";
-        background: linear-gradient(top, rgba(255, 255, 255, .15), 
-                    rgba(0, 0, 0, .25)), 
-                    linear-gradient(left top, rgba(255, 255, 255, 0), 
-                    rgba(255, 255, 255, .1) 50%, 
-                    rgba(255, 255, 255, 0) 50%, 
-                    rgba(255, 255, 255, 0));
-    }
-
-    .name {
-        font-family: sans;
-        font-size: 12px;
-        font-weight: bold;
-        @include chiseltext();
-    }
-    .atomicNumber {
-        font-family: sans;
-        font-size: 20px;
-        @include chiseltext();
-    }
-    .symbol {
-        position: relative;
-        bottom: -5%;
-        display: inline-block; 
-        width: 25%; 
-        font-size: 25px; 
-        font-weight: bolder;
-        text-align: center;
-        @include plastictext();
-    }
-    .atomicMass {
-        font-family: sans;
-        position: relative;
-        bottom: -16%;
-        font-size: 15px;
-        float: bottom;
-        clear: both;
-        @include chiseltext();
-    }
-    .element-overlay {
-        @include square(var(--squareSize));
-        position: relative;
-        top: -85%;
-        left: 0px;
-        opacity: 0.25;
-        border-radius: 10%;
-    }
+  }
 }
 
 .element-blank {
-    @include square(var(--squareSize));
-    float: left; 
-    clear: none; 
-    border: 1px; 
-    margin: 0; 
-    padding: 1px;
-    cursor: default;
+  @include square(var(--squareSize));
+  float: left;
+  clear: none;
+  border: 1px;
+  margin: 0;
+  padding: 1px;
+  cursor: default;
 }
 
 .clear {
-    display: inline-block;
-    float: none;
-    clear: both;
-    margin: 0;
-    width: 0;
-    height: 0;
+  display: inline-block;
+  float: none;
+  clear: both;
+  margin: 0;
+  width: 0;
+  height: 0;
 }
 
 /*
@@ -184,210 +186,105 @@ $fBlockBg: Violet;
 */
 
 @mixin legenditem() {
-    display: inline-block;
-    width: 160px;
-    height: 40px;
-    float: left;
-    clear: none;
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  float: left;
+  clear: none;
 }
 
 @mixin legendcolor($blockBg) {
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    background-color: $blockBg;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-color: $blockBg;
+  box-shadow: 3px 3px 2px #111111;
 }
 
 @mixin legendcaption() {
-    @include chiseltext();
-    display: block;
-    position: relative;
-    left: 45px;
-    font-size: 1.3em;
-    white-space: nowrap;
-    word-wrap: break-word;
-    text-align: center;
-    // font-weight: bold;
-    // vertical-align: middle;
+  @include chiseltext();
+  display: block;
+  position: relative;
+  left: -15px;
+  font-size: 0.75em;
+  white-space: nowrap;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  margin: 0px 0px 20px 20px;
 }
 
 @mixin legendtext($bgColor) {
-    .color {
-        @include legendcolor(bgColor);
-    }
-    .legendcaption {
-        @include legendcaption();
-    }
+  .color {
+    @include legendcolor($bgColor);
+  }
+
+  .legendcaption {
+    @include legendcaption();
+  }
 }
 
 /*
 * Block
 */
 
-
-
 @mixin blocklegend($blockBg) {
-    @include legenditem();
-    // @include legendcolor($blockBg);
-    // @include legendcaption();
-    @include legendtext($blockBg);
+  @include legenditem();
+  @include legendcolor($blockBg);
+  @include legendcaption();
+  @include legendtext($blockBg);
 }
 
-//.s-block { @include blocklegendbg($sBlockBg); } //
-.s-block { background-color: $sBlockBg; }
-.d-block { background-color: $dBlockBg; }
-.p-block { background-color: $pBlockBg; }
-.f-block { background-color: $fBlockBg; }
+.s-block {
+  background-color: $sBlockBg;
+}
+
+.d-block {
+  background-color: $dBlockBg;
+}
+
+.p-block {
+  background-color: $pBlockBg;
+}
+
+.f-block {
+  background-color: $fBlockBg;
+}
 
 div#legend-wrapper {
-    fieldset#block-legend {
-        border-radius: 15px;
-        width: 40%;
-        #s { @include blocklegend($sBlockBg);  }
-        #d { @include blocklegend($dBlockBg); }
-        #p { @include blocklegend($pBlockBg); }
-        #f { @include blocklegend($fBlockBg); }
+  fieldset#block-legend {
+    border-radius: 15px;
+    width: 250px;
+    float: left;
+    clear: both;
+    position: relative;
+    left: 250px;
+
+    #legendblocks {
+      width: 100%;
+      margin-left: 3%;
     }
+
+    #s {
+      @include blocklegend($sBlockBg);
+    }
+
+    #d {
+      @include blocklegend($dBlockBg);
+    }
+
+    #p {
+      @include blocklegend($pBlockBg);
+    }
+
+    #f {
+      @include blocklegend($fBlockBg);
+    }
+  }
 }
-
-
-/*
-* Type
-*/
-
-@mixin slashes() {
-    $backColor: rgba(0,0,0,0.25); 
-    $foreColor: #465298;
-    background: repeating-linear-gradient(
-		-45deg,
-		$backColor,
-		$backColor 10px,
-		$foreColor 10px,
-		$foreColor 20px,
-		$backColor 20px
-	) top left;
-}
-
-@mixin concentric() {
-    background: repeating-radial-gradient(
-        circle,
-        #D2691E,
-        #D2691E 10px,
-        #4b026f 10px, 
-        #4b026f 20px
-    );
-}
-
-@mixin polkadots() {
-    background-image: radial-gradient(black 30%, transparent 0%);
-    background-size: 12% 15%;
-}
-
-@mixin crosshatch() {
-    $color: OrangeRed;
-    $hatch: SandyBrown;
-    background-size: 18px 18px;
-    background-color: $color;
-    background-image: 
-		repeating-linear-gradient(
-			-45deg,
-			$hatch,
-			$hatch 15%,
-			transparent 5%,
-			transparent 50%
-		),
-		repeating-linear-gradient(
-			45deg,
-			$hatch,
-			$hatch 15%,
-			transparent 5%,
-			transparent 50%
-		);
-}
-
-@mixin vertical() {
-    $backColor: rgba(0,0,0,0.25); 
-    $foreColor: #465298;
-    background: repeating-linear-gradient(
-		90deg,
-		$backColor,
-		$backColor 10px,
-		$foreColor 10px,
-		$foreColor 20px,
-		$backColor 20px
-	) top left;
-}
-
-@mixin horizontal() {
-    $backColor: rgba(0,0,0,0.25); 
-    $foreColor: #465298;
-    background: repeating-linear-gradient(
-		0deg,
-		$backColor,
-		$backColor 10px,
-		$foreColor 10px,
-		$foreColor 20px,
-		$backColor 20px
-	) top left;
-}
-
 
 div#legend-wrapper {
-    fieldset.category-legend {
-        border-radius: 15px;
-        #alkali-metal { 
-            @include crosshatch();
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #alkaline-earth-metal { 
-            @include slashes();
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #lanthanide { 
-            @include polkadots();
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #actinide { 
-            @include concentric();
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #transition-metal { 
-            @include horizontal();
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #post-transition-metal { 
-            @include vertical();
-            @include legenditem(); 
-            @include legendtext(none);
-        }
-        #metalloid { 
-            @include legenditem(); 
-            @include legendtext(none);
-        }
-        #reactive-nonmetal { 
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #halogen { 
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #noble-gas { 
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #nonmetal { 
-            @include legenditem();
-            @include legendtext(none);
-        }
-        #unknown { 
-            @include legenditem();
-            @include legendtext(none);
-        }
-    }
+  fieldset.category-legend {
+    border-radius: 15px;
+  }
 }
