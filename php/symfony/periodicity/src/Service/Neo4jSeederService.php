@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use GraphAware\Common\Result\Result;
 use GraphAware\Neo4j\Client\ClientInterface;
 use GraphAware\Neo4j\Client\Exception\Neo4jException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -10,20 +9,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class Neo4jSeederService
 {
 
-    /**
-     * @var ParameterBagInterface
-     */
+    /**  @var ParameterBagInterface */
     protected $parameterBag;
 
-    /**
-     * @var ClientInterface
-     */
+    /** @var ClientInterface */
     protected $client;
 
     /**
-     * 
-     * 
      * @param ParameterBagInterface $parameterBag
+     * @param ClientInterface       $client
      */
     public function __construct(ParameterBagInterface $parameterBag, ClientInterface $client)
     {
@@ -32,7 +26,7 @@ class Neo4jSeederService
     }
 
     /**
-     * Seed the Neo4j database with a publicly available periodic table in csv format
+     * Seed the Neo4j database with a periodic table in csv format
      * 
      * @return Neo4jSeederService
      */
@@ -48,6 +42,8 @@ class Neo4jSeederService
     }
 
     /**
+     * Drop and detach all nodes and relationships; truncates the database
+     * 
      * @return Neo4jSeederService
      */
     public function truncate(): self
@@ -57,19 +53,116 @@ class Neo4jSeederService
     }
 
     /**
+     * Relate elements to their respective Blocks
+     * 
      * @return Neo4jSeederService
      */
     public function relateBlocks(): self
     {
         $query = <<<HEREDOC
-MATCH(n:Element {Element:"Hydrogen"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-MATCH(n:Element {Element:"Helium"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-MATCH(n:Element {Element:"Lithium"}) MERGE (n)-[:IN_BLOCK]->(s:Block {name: "s"});
-
-
+MATCH (element:Element)
+MERGE (block:Block { name: element.Block })
+MERGE (element)-[:IN_BLOCK]-(block);
 HEREDOC;
         $this->client->run($query);
         return $this;
     }
 
+    /**
+     * Relate elements to their respective Periods
+     * 
+     * @return Neo4jSeederService
+     */
+    public function relatePeriods(): self
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element)
+MERGE (period:Period { name: element.Period })
+MERGE (element)-[:IN_PERIOD]-(period);
+HEREDOC;
+        $this->client->run($query);
+        return $this;
+    }
+
+    /**
+     * Relate elements to their respective category, subcategory, and group
+     * 
+     * @return Neo4jSeederService
+     */
+    public function relateCategories(): self
+    {
+        $this->relateElementCategories();
+        $this->relatePnictogens();
+        $this->relateChalcogens();
+        $this->relateHalogens();
+        $this->relateTransactinides();
+        return $this;
+    }
+
+    /**
+     * Relate elements by category and subcategory
+     * 
+     */
+    public function relateElementCategories(): void
+    {
+        // breakdown category type by deconstructing the array
+        $query = <<<HEREDOC
+MATCH (element:Element)
+MERGE (category:ElementCategory { name: element.ElementCategory, categoryType: "elementSubcategory"})
+MERGE (element)-[:IN_CATEGORY]-(category)
+HEREDOC;
+        $this->client->run($query);
+    }
+
+    /**
+     * Relate elements belonging to Pnictogen group (group 15)
+     */
+    public function relatePnictogens(): void
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element {Group: 15})
+MERGE (pnictogen:ElementCategory { name: "Pnictogen", categoryType: "group"})
+MERGE (element)-[:IN_CATEGORY]-(pnictogen);
+HEREDOC;
+        $this->client->run($query);
+    }
+
+    /**
+     * Relate elements belonging to Chalcogen group (group 16)
+     */
+    public function relateChalcogens(): void
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element {Group: 16})
+MERGE (chalcogen:ElementCategory { name: "Chalcogen", categoryType: "group"})
+MERGE (element)-[:IN_CATEGORY]-(chalcogen);
+HEREDOC;
+        $this->client->run($query);
+    }
+
+    /**
+     * Relate elements belonging to Halogen group (group 17)
+     */
+    public function relateHalogens(): void
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element {Group: 17})
+MERGE (halogen:ElementCategory { name: "Halogen", categoryType: "group"})
+MERGE (element)-[:IN_CATEGORY]-(halogen);
+HEREDOC;
+        $this->client->run($query);
+    }
+
+    /**
+     * Relate elements that are Transactinides
+     */
+    public function relateTransactinides(): void
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element) WHERE element.AtomicNumber > 103
+MERGE (transactinide:Transactinide { name: "Transactinide", categoryType: "transactinide"})
+MERGE (element)-[:TRANSACTINIDE]-(transactinide);
+HEREDOC;
+        $this->client->run($query);
+    }
 }

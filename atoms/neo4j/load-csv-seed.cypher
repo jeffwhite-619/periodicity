@@ -1,9 +1,10 @@
-// mv atoms/neo4j/periodic-table.csv ~/.config/Neo4j-Desktop/Application/neo4jDatabases/database-UUID-goes-here/installation-version.number.here/import/
+// mv atoms/neo4j/periodic-table.csv ~/.config/Neo4j\ Desktop/Application/neo4jDatabases/database-UUID-goes-here/installation-version.number.here/import/
 
 LOAD CSV WITH HEADERS 
 FROM "file:///periodic-table.csv" 
 AS line 
 CREATE(:Element {
+    name: line.Symbol + " | " + toString(line.AtomicNumber),
     AtomicNumber: toInteger(line.AtomicNumber),
     Element: line.Element,
     Symbol: line.Symbol,
@@ -15,11 +16,11 @@ CREATE(:Element {
     Group: toInteger(line.Group),
     Phase: line.Phase,
     Radioactive: line.Radioactive,
-    Natural: line.Natural,
+    NaturalOccurence: line.NaturalOccurence,
     Metal: line.Metal,
     Nonmetal: line.Nonmetal,
     Metalloid: line.Metalloid,
-    Type: line.Type,
+    ElementCategory: line.ElementCategory,
     AtomicRadius: toFloat(line.AtomicRadius),
     Electronegativity: toFloat(line.Electronegativity),
     FirstIonization: toFloat(line.FirstIonization),
@@ -31,5 +32,8 @@ CREATE(:Element {
     Year: toInteger(line.Year),
     SpecificHeat: toFloat(line.SpecificHeat),
     NumberofShells: toInteger(line.NumberofShells),
-    NumberofValence: toInteger(line.NumberofValence)
+    NumberofValence: toInteger(line.NumberofValence),
+    Block: line.Block,
+    ElectronConfiguration: line.ElectronConfiguration,
+    ElectronsPerShell: line.ElectronsPerShell
 })
