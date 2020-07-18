@@ -1,4 +1,4 @@
-// mv atoms/neo4j/periodic-table.csv ~/.config/Neo4j-Desktop/Application/neo4jDatabases/database-UUID-goes-here/installation-version.number.here/import/
+// mv atoms/neo4j/periodic-table.csv ~/.config/Neo4j\ Desktop/Application/neo4jDatabases/database-UUID-goes-here/installation-version.number.here/import/
 
 LOAD CSV WITH HEADERS 
 FROM "file:///periodic-table.csv" 
