@@ -8,16 +8,17 @@ use App\Relationship\Block;
 
 /**
  * @OGM\Node(label="Element")
+ * OGM\Repository()
  */
 class Element extends Node
 {
 
     /**
-     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block" mappedBy="name")
+     * @OGM\Relationship(type="IN_BLOCK", collection=false, direction="OUTGOING", targetEntity="Block")
      * 
      * @var Block
      */
-     protected $block;
+    protected $block;
 
     /**
      * @OGM\GraphId()
