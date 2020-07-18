@@ -9,20 +9,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 class Neo4jSeederService
 {
 
-    /**
-     * @var ParameterBagInterface
-     */
+    /**  @var ParameterBagInterface */
     protected $parameterBag;
 
-    /**
-     * @var ClientInterface
-     */
+    /** @var ClientInterface */
     protected $client;
 
     /**
-     * 
-     * 
      * @param ParameterBagInterface $parameterBag
+     * @param ClientInterface       $client
      */
     public function __construct(ParameterBagInterface $parameterBag, ClientInterface $client)
     {
@@ -47,6 +42,8 @@ class Neo4jSeederService
     }
 
     /**
+     * Drop and detach all nodes and relationships; truncates the database
+     * 
      * @return Neo4jSeederService
      */
     public function truncate(): self
@@ -56,6 +53,8 @@ class Neo4jSeederService
     }
 
     /**
+     * Relate elements to their respective Blocks
+     * 
      * @return Neo4jSeederService
      */
     public function relateBlocks(): self
@@ -70,6 +69,24 @@ HEREDOC;
     }
 
     /**
+     * Relate elements to their respective Periods
+     * 
+     * @return Neo4jSeederService
+     */
+    public function relatePeriods(): self
+    {
+        $query = <<<HEREDOC
+MATCH (element:Element)
+MERGE (period:Period { name: element.Period })
+MERGE (element)-[:IN_PERIOD]-(period);
+HEREDOC;
+        $this->client->run($query);
+        return $this;
+    }
+
+    /**
+     * Relate elements to their respective category, subcategory, and group
+     * 
      * @return Neo4jSeederService
      */
     public function relateCategories(): self
@@ -82,7 +99,10 @@ HEREDOC;
         return $this;
     }
 
-
+    /**
+     * Relate elements by category and subcategory
+     * 
+     */
     public function relateElementCategories(): void
     {
         // breakdown category type by deconstructing the array
@@ -94,6 +114,9 @@ HEREDOC;
         $this->client->run($query);
     }
 
+    /**
+     * Relate elements belonging to Pnictogen group (group 15)
+     */
     public function relatePnictogens(): void
     {
         $query = <<<HEREDOC
@@ -104,6 +127,9 @@ HEREDOC;
         $this->client->run($query);
     }
 
+    /**
+     * Relate elements belonging to Chalcogen group (group 16)
+     */
     public function relateChalcogens(): void
     {
         $query = <<<HEREDOC
@@ -114,6 +140,9 @@ HEREDOC;
         $this->client->run($query);
     }
 
+    /**
+     * Relate elements belonging to Halogen group (group 17)
+     */
     public function relateHalogens(): void
     {
         $query = <<<HEREDOC
@@ -124,6 +153,9 @@ HEREDOC;
         $this->client->run($query);
     }
 
+    /**
+     * Relate elements that are Transactinides
+     */
     public function relateTransactinides(): void
     {
         $query = <<<HEREDOC
@@ -133,5 +165,4 @@ MERGE (element)-[:TRANSACTINIDE]-(transactinide);
 HEREDOC;
         $this->client->run($query);
     }
-
 }

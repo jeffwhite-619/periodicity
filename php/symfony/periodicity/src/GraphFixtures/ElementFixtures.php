@@ -3,8 +3,10 @@
 namespace App\GraphFixtures;
 
 use App\Service\Neo4jSeederService;
-use Exception;
 
+/**
+ * Seed the existing neo4j database
+ */
 class ElementFixtures
 {
     protected $service;
@@ -16,7 +18,6 @@ class ElementFixtures
 
     public function load()
     {
-        $this->service->truncate()->seed()->relateBlocks()->relateCategories();
+        $this->service->truncate()->seed()->relateBlocks()->relatePeriods()->relateCategories();
     }
-
 }
