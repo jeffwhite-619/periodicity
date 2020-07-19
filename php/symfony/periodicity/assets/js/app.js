@@ -1,5 +1,5 @@
 /* periodicity app js */
 
-require('../css/app.scss');
+require("../css/app.scss");
 
-const $ = require('jquery');
+const $ = require("jquery");
