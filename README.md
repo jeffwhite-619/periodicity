@@ -6,11 +6,31 @@ A project to represent the periodic table in various ways for various purposes.
 
 Basically I'm playing around.
 
-The current idea is to setup a client backend in PHP with Symfony, and store
-the elements of the periodic table in Neo4j. I'll probably throw in some kind of
-front end framework du jour like Vue to render the elements, and hopefully the
-one cool thing I can do is write Cypher queries that form molecules from the
+Initially, I've setup the client in PHP and Symfony. In the future, I'd like to do other clients
+in Python, Rust or something else, and store the elements of the periodic table in Neo4j.
+
+Later on, I'll probably throw in some kind of front end framework du jour like Vue to render the elements,
+and hopefully the one cool thing I can do is write Cypher queries that form molecules from the
 atoms.
+
+## What Does This Thing Do?
+
+To me, the cool stuff is in the Neo4j Browser app, in Neo4j Desktop. With the elements of the
+periodic table in a graph database, we can do all kinds of things, mundane things, and see them in a
+whole new way.
+
+For example, this is what the table looks like when we look at several kinds of relationships to
+categories, blocks, periods, etc.:
+
+![alt text](https://github.com/jeffwhite-619/periodicity/blob/master/atoms/graphs/periodicity-blocks-categories.png?raw=true "Grouping elements by category and block")
+
+![alt text](https://github.com/jeffwhite-619/periodicity/blob/master/atoms/graphs/periodicity-browser-transactinies-catalysis.png?raw=true "Grouping elements by category, block, transactinides and catalysis groups")
+
+![alt text](https://github.com/jeffwhite-619/periodicity/blob/master/atoms/graphs/periodicity-browser-periods-stretched.png?raw=true "Grouping elements by category, block, period, transactinides and catalysis groups")
+
+As for the web client, so far it's just a mundane thing seen in the usual, mundane way:
+
+![alt text](https://github.com/jeffwhite-619/periodicity/blob/master/atoms/graphs/periodicity-element-page.png?raw=true "Element page")
 
 ## Getting Started
 
