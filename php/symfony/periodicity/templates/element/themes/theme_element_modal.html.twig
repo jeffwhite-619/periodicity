@@ -1,10 +1,7 @@
 {% set natoccur = node.get('NaturalOccurence')|lower|replace({' ': '-'}) %} {%
 set category = node.get('ElementCategory')|lower|replace({' ': '-'}) %}
 
-<div
-  class="element-modal"
-  style="display: none;"
->
+<div class="element-modal" style="display: none;">
   <div class="modal-content" style="opacity: 0;">
     <div class="name">{{ node.get("Element") }}</div>
     <div class="atomicNumber">{{ node.get("AtomicNumber") }}</div>

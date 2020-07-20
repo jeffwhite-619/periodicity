@@ -4,7 +4,7 @@ $("document").ready(function () {
   let any_element = $(".element");
   let modalContainer = $("#modal-container");
 
-  function resetModal() {
+  function resetModal(modal) {
     modalContainer.empty();
     modalContainer.css({ width: "1px", height: "1px" });
   }
