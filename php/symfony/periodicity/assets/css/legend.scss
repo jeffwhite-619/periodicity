@@ -1,0 +1,111 @@
+// @import "color.scss";
+// @import "utils/utils.scss";
+// @import "utils/text.scss";
+
+/*
+* Legend
+*/
+
+@mixin legenditem() {
+  display: inline-block;
+  width: 160px;
+  height: 40px;
+  float: left;
+  clear: none;
+}
+
+@mixin legendcolor($blockBg) {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  background-color: $blockBg;
+  box-shadow: 3px 3px 2px #111111;
+}
+
+@mixin legendcaption() {
+  @include chiseltext();
+  display: block;
+  position: relative;
+  left: -15px;
+  font-size: 0.75em;
+  white-space: nowrap;
+  word-wrap: break-word;
+  text-align: center;
+  font-weight: bold;
+  margin: 0px 0px 20px 20px;
+}
+
+@mixin legendtext($bgColor) {
+  .color {
+    @include legendcolor($bgColor);
+  }
+
+  .legendcaption {
+    @include legendcaption();
+  }
+}
+
+/*
+* Block
+*/
+
+@mixin blocklegend($blockBg) {
+  @include legenditem();
+  @include legendcolor($blockBg);
+  @include legendcaption();
+  @include legendtext($blockBg);
+}
+
+.s-block {
+  background-color: $sBlockBg;
+}
+
+.d-block {
+  background-color: $dBlockBg;
+}
+
+.p-block {
+  background-color: $pBlockBg;
+}
+
+.f-block {
+  background-color: $fBlockBg;
+}
+
+div#legend-wrapper {
+  fieldset#block-legend {
+    border-radius: 15px;
+    width: 250px;
+    float: left;
+    clear: both;
+    position: relative;
+    left: 250px;
+
+    #legendblocks {
+      width: 100%;
+      margin-left: 3%;
+    }
+
+    #s {
+      @include blocklegend($sBlockBg);
+    }
+
+    #d {
+      @include blocklegend($dBlockBg);
+    }
+
+    #p {
+      @include blocklegend($pBlockBg);
+    }
+
+    #f {
+      @include blocklegend($fBlockBg);
+    }
+  }
+}
+
+div#legend-wrapper {
+  fieldset.category-legend {
+    border-radius: 15px;
+  }
+}
