@@ -1,12 +1,15 @@
-{% set natoccur = node.get('NaturalOccurence')|lower|replace({' ': '-'}) %} {%
-set category = node.get('ElementCategory')|lower|replace({' ': '-'}) %}
+{% set elementModal = '/element/themes/theme_element_modal.html.twig' %}
+{% set natoccur = node.get('NaturalOccurence')|lower|replace({' ': '-'}) %}
+{% set category = node.get('ElementCategory')|lower|replace({' ': '-'}) %}
+
 <div
   class="element {{ node.get('Block') }}-block {{ natoccur }}"
   style="--squareSize:{{ squareSize }};"
 >
+  {% include elementModal with {"node": node} %}
   <div class="name">{{ node.get("Element") }}</div>
   <div class="atomicNumber">{{ node.get("AtomicNumber") }}</div>
-  {# link to detail page or pop modal #}
+
   <div class="symbol">
     {{ node.get("Symbol") }}
   </div>

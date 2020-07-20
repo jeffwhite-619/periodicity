@@ -1,50 +1,15 @@
 /*
 * Resources
 */
-@use "sass:color";
-
-.clear {
-  clear: both;
-}
-
-/*
-* Text
-*/
-
-@mixin plastictext() {
-  text-shadow: 0 0 2px rgba(255, 255, 255, 0.9), 0 15px 25px rgba(0, 0, 0, 0.3),
-    0 -2px 3px rgba(0, 0, 0, 0.1), 0 -5px 10px rgba(255, 255, 255, 0.5),
-    0 5px 10px rgba(0, 0, 0, 0.3), 0 3px 4px rgba(255, 255, 255, 0.2),
-    0 0 20px rgba(204, 208, 212, 0.45);
-}
-
-@mixin chiseltext() {
-  text-shadow: 0px 1px 1px #fdfdfd;
-}
-
-/*
-* Colors
-*/
-$sBlockBg: #797979;
-$dBlockBg: #3f3f3f;
-$pBlockBg: #f5f5f5;
-$fBlockBg: #bcbcbc;
+@import "color.scss";
+@import "utils/utils.scss";
+@import "utils/text.scss";
+@import "legend.scss";
+@import "element-modal.scss";
 
 /*
 * Table
 */
-
-@mixin widthsize($widthSize) {
-  min-width: $widthSize;
-  max-width: $widthSize;
-  width: $widthSize;
-}
-
-@mixin heightsize($heightSize) {
-  height: $heightSize;
-  min-height: $heightSize;
-  max-height: $heightSize;
-}
 
 .periodic {
   @include widthsize(var(--tableWidth));
@@ -108,14 +73,18 @@ $fBlockBg: #bcbcbc;
 
   &::before {
     content: "";
-    background: linear-gradient(top,
+    background: linear-gradient(
+        top,
         rgba(255, 255, 255, 0.15),
-        rgba(0, 0, 0, 0.25)),
-      linear-gradient(left top,
+        rgba(0, 0, 0, 0.25)
+      ),
+      linear-gradient(
+        left top,
         rgba(255, 255, 255, 0),
         rgba(255, 255, 255, 0.1) 50%,
         rgba(255, 255, 255, 0) 50%,
-        rgba(255, 255, 255, 0));
+        rgba(255, 255, 255, 0)
+      );
   }
 
   .name {
@@ -179,112 +148,4 @@ $fBlockBg: #bcbcbc;
   margin: 0;
   width: 0;
   height: 0;
-}
-
-/*
-* Legend
-*/
-
-@mixin legenditem() {
-  display: inline-block;
-  width: 160px;
-  height: 40px;
-  float: left;
-  clear: none;
-}
-
-@mixin legendcolor($blockBg) {
-  width: 40px;
-  height: 40px;
-  display: inline-block;
-  background-color: $blockBg;
-  box-shadow: 3px 3px 2px #111111;
-}
-
-@mixin legendcaption() {
-  @include chiseltext();
-  display: block;
-  position: relative;
-  left: -15px;
-  font-size: 0.75em;
-  white-space: nowrap;
-  word-wrap: break-word;
-  text-align: center;
-  font-weight: bold;
-  margin: 0px 0px 20px 20px;
-}
-
-@mixin legendtext($bgColor) {
-  .color {
-    @include legendcolor($bgColor);
-  }
-
-  .legendcaption {
-    @include legendcaption();
-  }
-}
-
-/*
-* Block
-*/
-
-@mixin blocklegend($blockBg) {
-  @include legenditem();
-  @include legendcolor($blockBg);
-  @include legendcaption();
-  @include legendtext($blockBg);
-}
-
-.s-block {
-  background-color: $sBlockBg;
-}
-
-.d-block {
-  background-color: $dBlockBg;
-}
-
-.p-block {
-  background-color: $pBlockBg;
-}
-
-.f-block {
-  background-color: $fBlockBg;
-}
-
-div#legend-wrapper {
-  fieldset#block-legend {
-    border-radius: 15px;
-    width: 250px;
-    float: left;
-    clear: both;
-    position: relative;
-    left: 250px;
-
-    #legendblocks {
-      width: 100%;
-      margin-left: 3%;
-    }
-
-    #s {
-      @include blocklegend($sBlockBg);
-    }
-
-    #d {
-      @include blocklegend($dBlockBg);
-    }
-
-    #p {
-      @include blocklegend($pBlockBg);
-    }
-
-    #f {
-      @include blocklegend($fBlockBg);
-    }
-  }
-}
-
-div#legend-wrapper {
-  fieldset.category-legend {
-    border-radius: 15px;
-  }
 }

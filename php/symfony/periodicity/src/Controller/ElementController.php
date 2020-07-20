@@ -3,17 +3,13 @@
 namespace App\Controller;
 
 use App\Service\Neo4jService;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use GraphAware\Bolt\Result\Type\Node;
 
 class ElementController extends AbstractController
 {
 
-    /**
-     * @var Neo4jService
-     */
+    /**  @var Neo4jService */
     protected $service;
 
     public function __construct(Neo4jService $service)
