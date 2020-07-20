@@ -9,10 +9,6 @@ $("document").ready(function () {
     modalContainer.css({ width: "1px", height: "1px" });
   }
 
-  any_element.on("click", () => {
-    resetModal(modalContainer);
-  });
-
   modalContainer.on("click", (event) => {
     resetModal(event.currentTarget);
   });
