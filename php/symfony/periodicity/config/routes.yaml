@@ -1,3 +1,11 @@
 index:
-    path: /
-    controller: App\Controller\ElementController::index
+  path: /
+  controller: App\Controller\HomeController::index
+
+element:
+  path: /element
+  controller: App\Controller\ElementController::index
+
+molecule:
+  path: /molecule
+  controller: App\Controller\MoleculeController::index

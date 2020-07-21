@@ -4,6 +4,7 @@
 @import "color.scss";
 @import "utils/utils.scss";
 @import "utils/text.scss";
+@import "utils/page-heading.scss";
 @import "legend.scss";
 @import "element-modal.scss";
 
@@ -18,23 +19,7 @@
   position: relative;
   top: -100px;
 
-  div.heading {
-    margin: 1em auto;
-    max-width: 800px;
-    width: 95%;
-    font: 18px/1.5 sans-serif;
-    position: relative;
-    left: -165px;
-    top: 150px;
-
-    h1 {
-      text-align: center;
-      font-size: 50px;
-      color: #f9f9f9;
-      text-shadow: 3px 3px 0px #2c2e38, 5px 5px 0px #5c5f72;
-      letter-spacing: 10px;
-    }
-  }
+  @include pageHeading();
 
   div.table {
     @include widthsize(var(--tableWidth));

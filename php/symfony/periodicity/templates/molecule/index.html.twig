@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Periodicity: Molecule {% endblock %} 
+{% block body %} 
+{% set molecule = '/molecule/themes/theme_molecule.html.twig' %} 
+
+{% include "/home/themes/theme_nav.html.twig" %}
+<div
+  id="molecules-container"
+  style=""
+>
+  <div id="molecules" class="heading">
+    <h1>Molecules</h1>
+    <div id="legend-wrapper">
+      <fieldset id="molecule-legend">
+        <legend>Molecule Legend</legend>
+        <div id="legendblocks">
+          <div id="water">
+            <div class="color"></div>
+            <div class="legendcaption">Water</div>
+          </div>
+          {# <div id="CO2">
+            <div class="color"></div>
+            <div class="legendcaption">CO<sub>2</sub></div>
+          </div>
+          <div id="alcohol">
+            <div class="color"></div>
+            <div class="legendcaption">Alcohol</div>
+          </div>
+          <div id="salt">
+            <div class="color"></div>
+            <div class="legendcaption">Salt</div>
+          </div>
+          <div id="caffeine">
+            <div class="color"></div>
+            <div class="legendcaption">Caffeine</div>
+          </div>
+          <div id="dmt">
+            <div class="color"></div>
+            <div class="legendcaption">DMT</div>
+          </div> #}
+          <div class="clear"></div>
+        </div>
+      </fieldset>
+    </div>
+    <div style="margin-bottom: 150px;"></div>
+  </div>
+
+  <div id="molecule-layout-container">
+    <canvas id="molecule-canvas">
+    </canvas>
+  </div>
+
+</div>
+{% endblock %} 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/molecule.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/homenav.css') }}" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('moleculejs') }}
+{% endblock %}

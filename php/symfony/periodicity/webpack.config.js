@@ -24,8 +24,16 @@ Encore
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
   .addEntry("app", "./assets/js/app.js")
+  .addEntry("homejs", "./assets/js/home.js")
+
   .addEntry("elementjs", "./assets/js/element.js")
+  .addEntry("moleculejs", "./assets/js/molecule.js")
+
+  .addStyleEntry("home", "./assets/css/home.scss")
+  .addStyleEntry("homenav", "./assets/css/home-nav.scss")
   .addStyleEntry("element", "./assets/css/element.scss")
+  .addStyleEntry("molecule", "./assets/css/molecule.scss")
+
   //.addEntry('page1', './assets/js/page1.js')
   //.addEntry('page2', './assets/js/page2.js')
 

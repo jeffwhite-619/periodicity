@@ -1,0 +1,29 @@
+@import "color.scss";
+
+#periodicity-nav {
+  display: inline-block;
+  z-index: 999999999;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 20px;
+  ul {
+    li {
+      display: block;
+      list-style-type: none;
+      min-width: 50px;
+      margin-left: 6.25%;
+      margin-right: 6.25%;
+      float: left;
+      a,
+      a:active,
+      a:hover,
+      a:visited {
+        text-decoration: underline;
+        font-family: monospace;
+        font-size: 1.7em;
+        color: $navLight;
+        text-shadow: $navShadow 2px 2px;
+      }
+    }
+  }
+}

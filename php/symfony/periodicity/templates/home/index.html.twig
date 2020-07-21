@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %} 
+{% block title %}Periodicity: Home {% endblock %} 
+{% block body %} 
+<div>
+    <div class="heading">
+        <h1>Welcome to <wbr />Periodicity</h1>
+        <p>
+            Explore the Periodic Table of Elements by showing relationships between elements and the 
+            things that make them relate.
+        </p>
+    </div>
+    {% include "/home/themes/theme_nav.html.twig" %}
+</div>
+{% endblock %} 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/home.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/homenav.css') }}" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('homejs') }}
+{% endblock %}

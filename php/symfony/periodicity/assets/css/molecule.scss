@@ -1,0 +1,67 @@
+@import "utils/page-heading.scss";
+@import "color.scss";
+
+$canvasShadow: #111;
+
+.legendcaption {
+  font-size: 1.5em;
+  color: $navLight;
+  cursor: pointer;
+}
+
+#molecules-container {
+  margin: 0 auto;
+  position: relative;
+  margin-top: -100px;
+
+  #molecules {
+    #legend-wrapper {
+      #molecule-legend {
+        border-radius: 15px;
+        #legendblocks {
+          #water {
+          }
+        }
+      }
+    }
+  }
+
+  @include pageHeading();
+}
+//$legendwidth = {#molecule-legend}.width();
+
+$moleculeLayoutWidth: 780px;
+
+#molecule-layout-container {
+  margin: 0px auto;
+  //   margin: 0px 88px;
+  position: relative;
+  top: 25px;
+  left: -165px;
+  width: $moleculeLayoutWidth;
+  height: 620px;
+  border: 1px dashed $navLight;
+  display: block;
+  background-color: $fBlockBg;
+  //   box-shadow: inset 0.15em 0.15em 0.15em 0.15em #111111;
+}
+
+#molecule-layout-container:before,
+#molecule-layout-container:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width: $moleculeLayoutWidth;
+  background: $canvasShadow;
+  box-shadow: 0 35px 20px $canvasShadow;
+  transform: rotate(-8deg);
+}
+#molecule-layout-container:after {
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
