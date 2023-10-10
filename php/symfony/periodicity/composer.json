@@ -5,7 +5,11 @@
     "php": "^7.4.3",
     "ext-ctype": "*",
     "ext-iconv": "*",
-    "graphaware/neo4j-php-client": "^4.0",
+    "doctrine/annotations": "^1.0",
+    "doctrine/doctrine-bundle": "^2.3",
+    "doctrine/doctrine-migrations-bundle": "^3.2",
+    "doctrine/orm": "^2.7",
+    "graphaware/neo4j-php-client": "^4.8.5",
     "graphaware/neo4j-php-ogm": "@rc",
     "neo4j/neo4j-bundle": "^0.4.2",
     "sensio/framework-extra-bundle": "^5.1",
@@ -19,10 +23,12 @@
     "symfony/http-client": "4.4.*",
     "symfony/intl": "4.4.*",
     "symfony/monolog-bundle": "^3.1",
-    "symfony/orm-pack": "*",
     "symfony/process": "4.4.*",
+    "symfony/property-access": "4.4.*",
+    "symfony/property-info": "4.4.*",
+    "symfony/proxy-manager-bridge": "4.4.*",
     "symfony/security-bundle": "4.4.*",
-    "symfony/serializer-pack": "*",
+    "symfony/serializer": "4.4.*",
     "symfony/swiftmailer-bundle": "^3.1",
     "symfony/translation": "4.4.*",
     "symfony/twig-bundle": "4.4.*",
@@ -34,18 +40,25 @@
   "require-dev": {
     "doctrine/doctrine-fixtures-bundle": "^3.2",
     "mockery/mockery": "^1.2",
-    "symfony/debug-pack": "*",
+    "phpunit/phpunit": "^9.5",
+    "symfony/browser-kit": "4.4.*",
+    "symfony/css-selector": "4.4.*",
+    "symfony/debug-bundle": "4.4.*",
     "symfony/maker-bundle": "^1.0",
     "symfony/phpunit-bridge": "^4.4",
-    "symfony/profiler-pack": "*",
-    "symfony/test-pack": "*",
+    "symfony/stopwatch": "4.4.*",
+    "symfony/web-profiler-bundle": "4.4.*",
     "symfony/web-server-bundle": "4.4.*"
   },
   "config": {
     "preferred-install": {
       "*": "dist"
     },
-    "sort-packages": true
+    "sort-packages": true,
+    "allow-plugins": {
+      "symfony/flex": true,
+      "php-http/discovery": true
+    }
   },
   "autoload": {
     "psr-4": {

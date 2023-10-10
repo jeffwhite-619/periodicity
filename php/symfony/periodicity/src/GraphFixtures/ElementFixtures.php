@@ -9,7 +9,7 @@ use App\Service\Neo4jSeederService;
  */
 class ElementFixtures
 {
-    protected $service;
+    protected Neo4jSeederService $service;
 
     public function __construct(Neo4jSeederService $service)
     {

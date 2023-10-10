@@ -2,33 +2,16 @@
 
 namespace App\Service;
 
-use GraphAware\Neo4j\Client\ClientInterface;
 use GraphAware\Neo4j\Client\Exception\Neo4jException;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
-class Neo4jSeederService
+class Neo4jSeederService extends Neo4jSeederServiceAbstract
 {
-
-    /**  @var ParameterBagInterface */
-    protected $parameterBag;
-
-    /** @var ClientInterface */
-    protected $client;
-
-    /**
-     * @param ParameterBagInterface $parameterBag
-     * @param ClientInterface       $client
-     */
-    public function __construct(ParameterBagInterface $parameterBag, ClientInterface $client)
-    {
-        $this->parameterBag = $parameterBag;
-        $this->client       = $client;
-    }
 
     /**
      * Seed the Neo4j database with a periodic table in csv format
-     * 
+     *
      * @return Neo4jSeederService
+     * @throws Neo4jException
      */
     public function seed(): self
     {

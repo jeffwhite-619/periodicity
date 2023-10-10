@@ -1,6 +1,6 @@
 const $ = require("jquery");
 
-$("document").ready(function () {
+$("document").ready(() => {
   let any_element = $(".element");
   let modalContainer = $("#modal-container");
 

@@ -4,29 +4,9 @@ namespace App\Service;
 
 use App\Entity\Element;
 use GraphAware\Common\Result\Result;
-use GraphAware\Neo4j\Client\ClientInterface;
-use GraphAware\Neo4j\OGM\EntityManagerInterface;
 
-
-class Neo4jService
+class Neo4jService extends Neo4jServiceAbstract
 {
-
-    /**  @var ClientInterface */
-    protected $client;
-
-    /** @var EntityManagerInterface */
-    protected $manager;
-
-    /**
-     * 
-     * @param ClientInterface           $client
-     * @param EntityManagerInterface    $manager
-     */
-    public function __construct(ClientInterface $client, EntityManagerInterface $manager)
-    {
-        $this->client  = $client;
-        $this->manager = $manager;
-    }
 
     /**
      * @return iterable

@@ -57,14 +57,13 @@ For PHP:
 
 - From the project root, navigate your terminal to `php/symfony/periodicity`.
 - Configure your Neo4j database connection in the `.env` file.
-  - `NEO4J_DEFAULT_CONNECTION_DSN=bolt://neo4j:periodicity@localhost:7687` when the database is named `periodicity`. Update the port if you've configured it differently.
+  - `NEO4J_DEFAULT_CONNECTION_DSN=bolt://neo4j:periodicity520@localhost:7687` when the database is named `periodicity`. Update the port if you've configured it differently.
 - In the terminal type `bin/console neo4j:fixtures:load` to seed the database.
   - If this fails, try checking the error output for the database root directory and move the `periodic-table.csv` file to it.
 - Run installs from composer, npm, and install npm libraries:
   - `composer install`
   - `npm i`
-  - `npm install -g yarn webpack`
-  - For good measure: `npm audit fix`
+  - `npm install -g yarn webpack sass`
   - The composer.json and .lock are set to the appropriate versions to work correctly with the OGM drivers available at this writing. Ignore any deprecation warnings related to this.
 - To build the front-end: `yarn encore dev`
 - To run phpunit tests: `composer test`

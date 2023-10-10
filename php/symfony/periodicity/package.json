@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "@symfony/webpack-encore": "^0.28.3",
+    "@symfony/webpack-encore": "^1.8.2",
     "core-js": "^3.6.5",
-    "node-sass": "^4.14.1",
+    "node-sass": "^9.0.0",
     "regenerator-runtime": "^0.13.5",
     "webpack-notifier": "^1.6.0"
   },
@@ -15,7 +15,11 @@
     "build": "encore production --progress"
   },
   "dependencies": {
+    "d3": "^7.8.5",
     "jquery": "^3.5.1",
-    "sass-loader": "^7.0.1"
+    "n": "^8.1.0",
+    "p5": "^1.1.5",
+    "sass-loader": "^13.3.2",
+    "vis-network": "^8.2.1"
   }
 }
