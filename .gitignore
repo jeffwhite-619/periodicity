@@ -1,6 +1,5 @@
 /atoms/neo4j/tmp
 ### vscode
 periodicity.code-workspace
-
-./.idea
-./.vscode
+.idea
+.vscode
