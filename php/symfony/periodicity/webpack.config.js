@@ -27,7 +27,8 @@ Encore
   .addEntry("homejs", "./assets/js/home.js")
 
   .addEntry("elementjs", "./assets/js/element.js")
-  .addEntry("moleculejs", "./assets/js/molecule.js")
+  // .addEntry("moleculejs", "./assets/js/molecule.js")
+  .addEntry("moleculejs", "./assets/js/molecule-d3.js")
 
   .addStyleEntry("home", "./assets/css/home.scss")
   .addStyleEntry("homenav", "./assets/css/home-nav.scss")

@@ -7,6 +7,19 @@ $canvasShadow: #111;
   font-size: 1.5em;
   color: $navLight;
   cursor: pointer;
+
+  .legendcaptionsub {
+    font-size: 0.44em;
+    margin: 0 auto;
+    width: 100px;
+    position: relative;
+    top: -2px;
+  }
+}
+
+.legenditem {
+  max-width: 200px;
+  width: 200px;
 }
 
 #molecules-container {
@@ -18,9 +31,13 @@ $canvasShadow: #111;
     #legend-wrapper {
       #molecule-legend {
         border-radius: 15px;
+
+        legend {
+          cursor: default;
+        }
+
         #legendblocks {
-          #water {
-          }
+          #water {}
         }
       }
     }
@@ -28,13 +45,19 @@ $canvasShadow: #111;
 
   @include pageHeading();
 }
+
 //$legendwidth = {#molecule-legend}.width();
+
+/*
+
+Molecule canvas displaying atoms
+
+*/
 
 $moleculeLayoutWidth: 780px;
 
 #molecule-layout-container {
   margin: 0px auto;
-  //   margin: 0px 88px;
   position: relative;
   top: 25px;
   left: -165px;
@@ -43,7 +66,6 @@ $moleculeLayoutWidth: 780px;
   border: 1px dashed $navLight;
   display: block;
   background-color: $fBlockBg;
-  //   box-shadow: inset 0.15em 0.15em 0.15em 0.15em #111111;
 }
 
 #molecule-layout-container:before,
@@ -60,8 +82,19 @@ $moleculeLayoutWidth: 780px;
   box-shadow: 0 35px 20px $canvasShadow;
   transform: rotate(-8deg);
 }
+
 #molecule-layout-container:after {
   transform: rotate(8deg);
   right: 10px;
   left: auto;
+}
+
+// canvas
+
+canvas#molecule-canvas {
+  //   width: 74vmin;
+  //   height: 74vmin;
+
+  width: 780px;
+  height: 620px;
 }
